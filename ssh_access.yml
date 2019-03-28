@@ -1,0 +1,23 @@
+---
+- hosts: dbservers
+  sudo: yes
+
+  vars:
+    password: "$6$mysecretsalt$GCRAx5Uh7nBnYT1L5xgEJ1ffRvNmEjlrTsZFOiS3O1aKBqrD3H3zElihLwzBV0HB8EKr.z2dhezn2cQSV270w0"
+  tasks:
+
+   - name: Creating server group
+     group:
+       name: server
+       state: present
+
+   - name:  Create Mahesh user
+     user: name=mahesh password={{password}} group=server
+
+   - name: Running Python scripts to provide access of ssh to mahesh user
+     script: /opt/python_exercise/file.py
+     args:
+       executable: python
+
+   - name: restarting sshd
+     service: name=sshd enabled=yes state=restarted
