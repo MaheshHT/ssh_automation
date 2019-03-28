@@ -1,7 +1,6 @@
 web1 ansible_ssh_host=10.239.132.73
 db1 ansible_ssh_host=10.239.134.134
-#db1 ansible_ssh_host=10.239.134.69
-#10.239.133.174
+
 [webservers]
 web1
 
